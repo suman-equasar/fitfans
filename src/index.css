@@ -1,0 +1,9 @@
+@import url("https://befonts.com/product-sans-font.html");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Product Sans", sans-serif;
+}
