@@ -81,7 +81,7 @@ const SignUp = () => {
         confirmPassword: "",
       });
       alert("Sign Up Successful! Data saved to localStorage.");
-      navigate("/login");
+      navigate("/");
     }
   };
   return (
@@ -210,7 +210,7 @@ const SignUp = () => {
           <p className="text-center text-sm text-white mt-6">
             Already have an account?{" "}
             <Link
-              to="/login"
+              to="/"
               className="underline text-white font-medium transition-all"
             >
               Login

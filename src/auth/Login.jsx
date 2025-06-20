@@ -3,14 +3,16 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = React.useState({
     identifier: "", // phone, email, or username
     password: "",
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = React.useState({});
+  const [showModal, setShowModal] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -65,7 +67,7 @@ const Login = () => {
       );
 
       if (user) {
-        alert("Login successful!");
+        navigate("/dashboard");
         setFormData({
           identifier: "",
           password: "",
@@ -86,6 +88,9 @@ const Login = () => {
   };
 
   const handleForgotPassword = () => {
+    setShowModal(true);
+  };
+  const confirmForgotPassword = () => {
     const identifier = formData.identifier.trim();
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -98,10 +103,15 @@ const Login = () => {
 
     if (matchedUser) {
       localStorage.setItem("resetUserIdentifier", identifier);
-      window.location.href = "/forget"; // navigate manually
+      window.location.href = "/forget";
     } else {
       alert("User not found.");
+      setErrors({
+        identifier: "No user found with this email, username, or phone number.",
+      });
     }
+
+    setShowModal(false); // 🔸 Close the modal
   };
 
   return (
@@ -185,11 +195,33 @@ const Login = () => {
         {/* Sign up Link */}
         <div className="text-center text-sm mt-8 text-[#ffffff]">
           Don't have an account?{" "}
-          <Link to="/" className="text-white underline transition-all">
+          <Link to="/signup" className="text-white underline transition-all">
             Sign up
           </Link>
         </div>
       </form>
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[2px] flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm text-black">
+            <h2 className="text-lg font-semibold mb-4">Change Password</h2>
+            <p className="mb-6">Do you want to change your password?</p>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
+              >
+                No
+              </button>
+              <button
+                onClick={confirmForgotPassword}
+                className="px-4 py-2 rounded bg-[#08C7BF] text-white hover:bg-[#00bfae]"
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

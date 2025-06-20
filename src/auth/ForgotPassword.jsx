@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import logo from "../assets/Logo.svg";
 
-const ForgetPassword = () => {
+const ForgotPassword = () => {
   const [formData, setFormData] = React.useState({
     password: "",
     confirmPassword: "",
@@ -24,7 +24,7 @@ const ForgetPassword = () => {
       setResetUser(matchedUser);
     } else {
       alert("User not found.");
-      window.location.href = "/login";
+      window.location.href = "/";
     }
   }, []);
 
@@ -70,7 +70,7 @@ const ForgetPassword = () => {
 
       alert("Password updated successfully!");
       setFormData({ password: "", confirmPassword: "" });
-      window.location.href = "/login"; // redirect to login
+      window.location.href = "/"; // redirect to login
     }
   };
 
@@ -131,4 +131,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default ForgotPassword;

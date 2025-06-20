@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         productsans: ['"Product Sans"', "sans-serif"],
+        AlbertSans: ['"Albert Sans"', "sans-serif"],
       },
     },
   },
