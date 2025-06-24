@@ -148,7 +148,7 @@ const Profile = () => {
               className="w-56 h-full object-cover aspect-[3/4] rounded-xl transition-transform duration-300 group-hover:scale-105"
             />
             {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white text-sm px-3 py-2 flex justify-between items-center"></div> */}
-          </div>                                                                                                                 
+          </div>
         ))}
       </div>
     </>
