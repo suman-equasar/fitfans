@@ -8,8 +8,12 @@ import { CiHeart } from "react-icons/ci";
 import img from "../images/img.jpg";
 import test from "../images/test.jpg";
 import photo from "../images/image.jpg";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const [name, setName] = React.useState("alexander");
+  const [bio, setBio] = React.useState("");
+
   const images = [
     image, // This is the imported photo.jpeg
     img,
@@ -35,6 +39,11 @@ const Profile = () => {
   // Save the profile image to localStorage whenever it changes
   React.useEffect(() => {
     localStorage.setItem("profileImage", previewImage);
+    const storedName = localStorage.getItem("name");
+    const storedBio = localStorage.getItem("bio");
+
+    if (storedName) setName(storedName);
+    if (storedBio) setBio(storedBio);
   }, [previewImage]);
 
   const handleImageChange = (e) => {
@@ -82,15 +91,18 @@ const Profile = () => {
           <div className="flex-1 space-y-3">
             <div className="flex items-center gap-2">
               <div>
-                <h2 className="text-xl font-bold font-productsans">
-                  alexander
-                </h2>
-                <p className="text-gray-400 text-sm">@alexander</p>
+                <h2 className="text-xl font-bold font-productsans">{name}</h2>
+                <p className="text-gray-400 text-sm">
+                  @{name.toLowerCase().replace(/\s+/g, "")}
+                </p>
               </div>
               <div className="  ml-3 flex gap-2">
-                <button className="bg-gray-800 px-3 py-1 rounded-md text-xs hover:bg-gray-700">
+                <Link
+                  to="/dashboard/edit-profile"
+                  className="bg-gray-800 px-3 py-1 rounded-md text-xs hover:bg-gray-700"
+                >
                   Edit profile
-                </button>
+                </Link>
                 <FaShareAlt className="text-lg cursor-pointer hover:text-gray-400" />
                 <FaCog className="text-lg cursor-pointer hover:text-gray-400" />
               </div>
@@ -110,9 +122,8 @@ const Profile = () => {
             </div>
 
             {/* Bio */}
-            <p className="text-xs mt-5 text-[#ffffff] font-AlbertSans ">
-              There is no one who loves pain itself, <br />
-              who seeks after it and wants to have it,
+            <p className="text-xs mt-5 text-[#ffffff] font-AlbertSans max-w-72  whitespace-pre-wrap">
+              {bio}
             </p>
           </div>
         </div>

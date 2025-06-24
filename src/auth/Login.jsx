@@ -32,8 +32,12 @@ const Login = () => {
   const validate = () => {
     const newErrors = {};
 
-    const { identifier, password } = formData;
+    const identifier = formData.identifier.trim();
+    const password = formData.password.trim(); // Trim the password to remove extra spaces
+    console.log("Password:", password);
+    console.log("Password Length:", password.length);
 
+    // Validate identifier
     if (
       !emailRegex.test(identifier) &&
       !usernameRegex.test(identifier) &&
@@ -43,14 +47,18 @@ const Login = () => {
         "Enter a valid email, username (3-20 characters), or 10-digit phone number.";
     }
 
-    if (!passwordRegex.test(password)) {
-      newErrors.password =
-        "Password must be at least 8 characters, include letters and numbers.";
+    // Validate password length
+    if (password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters long.";
+    } else if (!passwordRegex.test(password)) {
+      console.log("Regex Test Result:", passwordRegex.test(password));
+      newErrors.password = "Password must include letters and numbers.";
     }
 
     setErrors(newErrors);
+    console.log("Validation Errors:", newErrors); // Log errors for debugging
 
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
   const handleSubmit = (e) => {
@@ -156,6 +164,10 @@ const Login = () => {
             >
               {showPassword ? <FiEye /> : <FiEyeOff />}
             </span>
+
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+            )}
           </div>
         </div>
 
