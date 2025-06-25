@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaCog, FaShareAlt } from "react-icons/fa";
 import image from "../images/photo.jpeg";
 import { BiGrid } from "react-icons/bi";
@@ -9,10 +9,10 @@ import img from "../images/img.jpg";
 import test from "../images/test.jpg";
 import photo from "../images/image.jpg";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext"; // Import UserContext
 
 const Profile = () => {
-  const [name, setName] = React.useState("alexander");
-  const [bio, setBio] = React.useState("");
+  const { name, bio } = useContext(UserContext);
 
   const images = [
     image, // This is the imported photo.jpeg
@@ -39,11 +39,11 @@ const Profile = () => {
   // Save the profile image to localStorage whenever it changes
   React.useEffect(() => {
     localStorage.setItem("profileImage", previewImage);
-    const storedName = localStorage.getItem("name");
-    const storedBio = localStorage.getItem("bio");
+    // const storedName = localStorage.getItem("name");
+    // const storedBio = localStorage.getItem("bio");
 
-    if (storedName) setName(storedName);
-    if (storedBio) setBio(storedBio);
+    // if (storedName) setName(storedName);
+    // if (storedBio) setBio(storedBio);
   }, [previewImage]);
 
   const handleImageChange = (e) => {

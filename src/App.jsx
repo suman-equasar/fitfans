@@ -7,23 +7,26 @@ import MainLayout from "./Layout/MainLayout";
 import Profile from "./pages/Profile";
 import More from "./pages/More";
 import EditProfile from "./pages/EditProfile";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/forget" element={<ForgotPassword />} />
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forget" element={<ForgotPassword />} />
 
-        <Route path="/dashboard" element={<MainLayout />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="edit-profile" element={<EditProfile />} />
-          <Route path="more" element={<More />} />
-          {/* Add more child routes as needed */}
-        </Route>
-      </Routes>
-    </Router>
+          <Route path="/dashboard" element={<MainLayout />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="edit-profile" element={<EditProfile />} />
+            <Route path="more" element={<More />} />
+            {/* Add more child routes as needed */}
+          </Route>
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
