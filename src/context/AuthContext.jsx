@@ -1,9 +1,21 @@
-import React, { useState, useEffect, createContext } from "react";
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem("user");
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.error("Error parsing user data from localStorage:", error);
+      return null;
+    }
+  });
 
-export const AuthContext = createContext();
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
-export const AuthProvider = ({ children }) => { 
-
-    
-
-}
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

@@ -87,10 +87,6 @@ const Login = () => {
           identifier: "Invalid email, username, or phone number.",
           password: "Incorrect password.",
         });
-        setFormData({
-          identifier: "",
-          password: "",
-        });
       }
     }
   };
