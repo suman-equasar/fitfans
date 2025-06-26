@@ -8,25 +8,28 @@ import Profile from "./pages/Profile";
 import More from "./pages/More";
 import EditProfile from "./pages/EditProfile";
 import { UserProvider } from "./context/UserContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forget" element={<ForgotPassword />} />
+    <AuthProvider>
+      <UserProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forget" element={<ForgotPassword />} />
 
-          <Route path="/dashboard" element={<MainLayout />}>
-            <Route path="profile" element={<Profile />} />
-            <Route path="edit-profile" element={<EditProfile />} />
-            <Route path="more" element={<More />} />
-            {/* Add more child routes as needed */}
-          </Route>
-        </Routes>
-      </Router>
-    </UserProvider>
+            <Route path="/dashboard" element={<MainLayout />}>
+              <Route path="profile" element={<Profile />} />
+              <Route path="edit-profile" element={<EditProfile />} />
+              <Route path="more" element={<More />} />
+              {/* Add more child routes as needed */}
+            </Route>
+          </Routes>
+        </Router>
+      </UserProvider>
+    </AuthProvider>
   );
 }
 
