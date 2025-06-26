@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // Assuming you have an AuthContext for authentication
 
 const Login = () => {
+  const { user, setUser } = useContext(AuthContext); // Access user state from AuthContext
+  console.log("User in Login:", user); // Log user state for debugging
   const [formData, setFormData] = React.useState({
     identifier: "", // phone, email, or username
     password: "",
@@ -75,7 +78,9 @@ const Login = () => {
       );
 
       if (user) {
+        setUser(user); // Set user in AuthContext
         navigate("/dashboard");
+
         setFormData({
           identifier: "",
           password: "",
