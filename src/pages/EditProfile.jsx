@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext"; // Import UserContext if needed
 
 const EditProfile = () => {
-  const navigate = useNavigate();
   const { name, setName, bio, setBio } = useContext(UserContext);
+  const { setIsEditModalOpen } = useContext(UserContext);
   const [error, setError] = useState(""); // State for error message
 
   const bioRegex = /^.{0,200}$/; // Regex to allow up to 200 characters
@@ -24,8 +23,7 @@ const EditProfile = () => {
       setError("Bio cannot exceed 200 characters.");
       return;
     }
-
-    navigate("/dashboard/profile"); // Go back to profile page
+    setIsEditModalOpen(false);
   };
 
   return (

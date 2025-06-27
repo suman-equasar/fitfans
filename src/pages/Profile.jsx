@@ -1,34 +1,32 @@
 import React, { useContext, useState } from "react";
 import { FaCog, FaShareAlt } from "react-icons/fa";
-import image from "../images/photo.jpeg";
 import { BiGrid } from "react-icons/bi";
 import { BiCollapseAlt } from "react-icons/bi";
 import { TfiBookmark } from "react-icons/tfi";
 import { CiHeart } from "react-icons/ci";
-import img from "../images/img.jpg";
-import test from "../images/test.jpg";
-import photo from "../images/image.jpg";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext"; // Import UserContext
+import EditProfile from "../pages/EditProfile"; // Import EditProfile component
 
 const Profile = () => {
   const { name, bio } = useContext(UserContext);
+  const { isEditModalOpen, setIsEditModalOpen } = useContext(UserContext);
 
   const images = [
-    image, // This is the imported photo.jpeg
-    img,
-    test,
-    photo,
-    image,
-    img,
-    test,
-    image,
-    img,
-    test,
-    photo,
-    image,
-    img,
-    test,
+    "https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302",
+    "https://ik.imagekit.io/svlr7dck0/pexels-nout-gons-80280-248159.jpg?updatedAt=1751003508798",
+    "https://ik.imagekit.io/svlr7dck0/pexels-rickyrecap-1586298.jpg?updatedAt=1751003525326",
+    "https://ik.imagekit.io/svlr7dck0/pexels-unchalee-srirugsar-14114-85773.jpg?updatedAt=1751003543088",
+    "https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302",
+    "https://ik.imagekit.io/svlr7dck0/pexels-nout-gons-80280-248159.jpg?updatedAt=1751003508798",
+    "https://ik.imagekit.io/svlr7dck0/pexels-rickyrecap-1586298.jpg?updatedAt=1751003525326",
+    "https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302",
+    "https://ik.imagekit.io/svlr7dck0/pexels-nout-gons-80280-248159.jpg?updatedAt=1751003508798",
+    "https://ik.imagekit.io/svlr7dck0/pexels-rickyrecap-1586298.jpg?updatedAt=1751003525326",
+    "https://ik.imagekit.io/svlr7dck0/pexels-unchalee-srirugsar-14114-85773.jpg?updatedAt=1751003543088",
+    "https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302",
+    "https://ik.imagekit.io/svlr7dck0/pexels-nout-gons-80280-248159.jpg?updatedAt=1751003508798",
+    "https://ik.imagekit.io/svlr7dck0/pexels-rickyrecap-1586298.jpg?updatedAt=1751003525326",
   ];
 
   // State for profile image
@@ -63,7 +61,7 @@ const Profile = () => {
         <div className="flex items-start gap-4">
           <div className="flex flex-row items-start gap-3">
             <img
-              src={image} // Use your uploaded image path or import
+              src="https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302" // Use your uploaded image path or import
               alt="New Banner"
               className="w-18 h-36 rounded-md mb-2 object-cover"
             />
@@ -98,8 +96,9 @@ const Profile = () => {
               </div>
               <div className="  ml-3 flex gap-2">
                 <Link
-                  to="/dashboard/edit-profile"
+                  to="#"
                   className="bg-gray-800 px-3 py-1 rounded-md text-xs hover:bg-gray-700"
+                  onClick={() => setIsEditModalOpen(true)} // Open edit modal
                 >
                   Edit profile
                 </Link>
@@ -111,7 +110,7 @@ const Profile = () => {
             {/* Stats aligned below name */}
             <div className="flex gap-8 mt-4 text-sm font-bold font-productsans">
               <span className="flex items-center gap-1 font-productsans font-bold">
-                <strong className="text-white text-sm ">0</strong> posts
+                <strong className="text-white text-sm">0</strong> posts
               </span>
               <span className="flex items-center gap-1 font-productsans font-bold">
                 <strong className="text-white text-sm">0</strong> followers
@@ -122,7 +121,8 @@ const Profile = () => {
             </div>
 
             {/* Bio */}
-            <p className="text-xs mt-5 text-[#ffffff] font-AlbertSans max-w-72  whitespace-pre-wrap">
+
+            <p className="text-xs mt-5 text-[#ffffff] font-AlbertSans max-w-64 whitespace-pre-wrap break-all">
               {bio}
             </p>
           </div>
@@ -162,6 +162,19 @@ const Profile = () => {
           </div>
         ))}
       </div>
+      {isEditModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 ">
+          <div className="bg-black p-6 rounded-xl relative w-full max-w-lg">
+            <button
+              onClick={() => setIsEditModalOpen(false)}
+              className="absolute top-2 right-3 text-white text-xl font-bold"
+            >
+              ×
+            </button>
+            <EditProfile />
+          </div>
+        </div>
+      )}
     </>
   );
 };

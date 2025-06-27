@@ -38,7 +38,7 @@ const Sidebar = () => {
       </div>
 
       {/* Navigation Menu */}
-      <nav className="space-y-3 text-sm">
+      <nav className="space-y-3 text-lg font-productsans">
         <MenuItem icon={<FaHome />} label="For You" />
         <MenuItem icon={<FaCompass />} label="Explore" />
         <MenuItem icon={<FaEnvelope />} label="Messages" />
