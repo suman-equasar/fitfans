@@ -92,7 +92,9 @@ const Profile = () => {
           <div className="flex-1 space-y-3">
             <div className="flex items-center gap-2">
               <div>
-                <h2 className="text-xl font-bold font-productsans">{name}</h2>
+                <h2 className="text-xl font-bold font-productsans">
+                  {name || "alexander"}
+                </h2>
                 <p className="text-gray-400 text-sm">
                   @{name.toLowerCase().replace(/\s+/g, "")}
                 </p>
@@ -178,7 +180,7 @@ const Profile = () => {
         ))}
       </div>
       {isEditModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 ">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-black p-6 rounded-xl relative w-full max-w-lg">
             <button
               onClick={() => setIsEditModalOpen(false)}
@@ -187,41 +189,6 @@ const Profile = () => {
               ×
             </button>
             <EditProfile />
-          </div>
-        </div>
-      )}
-
-      {showSharePopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-black text-white p-6 rounded-xl w-full max-w-md relative">
-            <button
-              onClick={() => setShowSharePopup(false)}
-              className="absolute top-2 right-3 text-white text-xl font-bold"
-            >
-              ×
-            </button>
-            <h2 className="text-xl mb-4 font-semibold">Share Profile</h2>
-
-            {/* Relative container for input + button */}
-            <div className="relative mb-4">
-              <input
-                type="text"
-                value={shareUrl}
-                readOnly
-                className="w-full p-2 pr-10 border border-gray-300 rounded text-black"
-              />
-              <button
-                onClick={() => {
-                  navigator.clipboard
-                    .writeText(shareUrl)
-                    .then(() => alert("URL copied to clipboard!"))
-                    .catch((err) => console.error("Copy failed", err));
-                }}
-                className="absolute top-1/2 right-2 -translate-y-1/2 text-black"
-              >
-                <FaRegCopy />
-              </button>
-            </div>
           </div>
         </div>
       )}

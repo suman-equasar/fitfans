@@ -185,7 +185,7 @@ const SignUp = () => {
             type="submit"
             className="w-full bg-[#08C7BF] hover:bg-teal-500 text-white py-3 sm:py-4 font-productsans rounded-md font-medium transition-all"
           >
-            login
+            Sign Up
           </button>
 
           {/* Google Login */}
