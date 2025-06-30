@@ -5,12 +5,15 @@ import { BiCollapseAlt } from "react-icons/bi";
 import { TfiBookmark } from "react-icons/tfi";
 import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { FaRegCopy } from "react-icons/fa";
 import { UserContext } from "../context/UserContext"; // Import UserContext
 import EditProfile from "../pages/EditProfile"; // Import EditProfile component
 
 const Profile = () => {
   const { name, bio } = useContext(UserContext);
   const { isEditModalOpen, setIsEditModalOpen } = useContext(UserContext);
+  const [shareUrl, setShareUrl] = useState("");
+  const [showSharePopup, setShowSharePopup] = useState(false);
 
   const images = [
     "https://ik.imagekit.io/svlr7dck0/free-photo-of-charming-cottage-surrounded-by-daisy-field.jpeg?updatedAt=1751003463302",
@@ -102,7 +105,19 @@ const Profile = () => {
                 >
                   Edit profile
                 </Link>
-                <FaShareAlt className="text-lg cursor-pointer hover:text-gray-400" />
+                <FaShareAlt
+                  onClick={() => {
+                    const profileKey = name.toLowerCase().replace(/\s +/g, "");
+                    const generatedURL = `${window.location.origin}/shared/${profileKey}`;
+                    localStorage.setItem(
+                      `profile_${profileKey}`,
+                      JSON.stringify({ name, bio, image: previewImage })
+                    );
+                    setShareUrl(generatedURL);
+                    setShowSharePopup(true);
+                  }}
+                  className="text-lg cursor-pointer hover:text-gray-400"
+                />
                 <FaCog className="text-lg cursor-pointer hover:text-gray-400" />
               </div>
             </div>
@@ -172,6 +187,41 @@ const Profile = () => {
               ×
             </button>
             <EditProfile />
+          </div>
+        </div>
+      )}
+
+      {showSharePopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-black text-white p-6 rounded-xl w-full max-w-md relative">
+            <button
+              onClick={() => setShowSharePopup(false)}
+              className="absolute top-2 right-3 text-white text-xl font-bold"
+            >
+              ×
+            </button>
+            <h2 className="text-xl mb-4 font-semibold">Share Profile</h2>
+
+            {/* Relative container for input + button */}
+            <div className="relative mb-4">
+              <input
+                type="text"
+                value={shareUrl}
+                readOnly
+                className="w-full p-2 pr-10 border border-gray-300 rounded text-black"
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(shareUrl)
+                    .then(() => alert("URL copied to clipboard!"))
+                    .catch((err) => console.error("Copy failed", err));
+                }}
+                className="absolute top-1/2 right-2 -translate-y-1/2 text-black"
+              >
+                <FaRegCopy />
+              </button>
+            </div>
           </div>
         </div>
       )}

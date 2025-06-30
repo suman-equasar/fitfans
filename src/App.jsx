@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import More from "./pages/More";
 import EditProfile from "./pages/EditProfile";
 import { UserProvider } from "./context/UserContext";
+import SharedProfile from "./pages/SharedProfile";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forget" element={<ForgotPassword />} />
+
+          <Route path="shared/:id" element={<SharedProfile />} />
 
           <Route path="/dashboard" element={<MainLayout />}>
             <Route path="profile" element={<Profile />} />
