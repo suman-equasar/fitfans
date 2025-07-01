@@ -10,7 +10,7 @@ import { UserContext } from "../context/UserContext"; // Import UserContext
 import EditProfile from "../pages/EditProfile"; // Import EditProfile component
 
 const Profile = () => {
-  const { name, bio, userId } = useContext(UserContext);
+  const { name, bio, userId, userHandle } = useContext(UserContext);
   const { isEditModalOpen, setIsEditModalOpen } = useContext(UserContext);
   const [shareUrl, setShareUrl] = useState("");
   const [showSharePopup, setShowSharePopup] = useState(false);
@@ -95,11 +95,9 @@ const Profile = () => {
                 <h2 className="text-xl font-bold font-productsans">
                   {name || "alexander"}
                 </h2>
-                <p className="text-gray-400 text-sm">
-                  @{name.toLowerCase().replace(/\s+/g, "")}
-                </p>
+                <p className="text-gray-400 text-sm">@{userHandle}</p>
               </div>
-              <div className="  ml-3 flex gap-2">
+              <div className="ml-3 flex gap-2">
                 <Link
                   to="#"
                   className="bg-gray-800 px-3 py-1 rounded-md text-xs hover:bg-gray-700"
