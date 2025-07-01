@@ -209,7 +209,7 @@ const Login = () => {
         </div>
       </form>
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[2px] flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[#1E1E1E] bg-opacity-75 backdrop-blur-[2px] flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm text-black">
             <h2 className="text-lg font-semibold mb-4">Change Password</h2>
             <p className="mb-6">Do you want to change your password?</p>

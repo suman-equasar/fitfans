@@ -10,7 +10,7 @@ import { UserContext } from "../context/UserContext"; // Import UserContext
 import EditProfile from "../pages/EditProfile"; // Import EditProfile component
 
 const Profile = () => {
-  const { name, bio } = useContext(UserContext);
+  const { name, bio, userId } = useContext(UserContext);
   const { isEditModalOpen, setIsEditModalOpen } = useContext(UserContext);
   const [shareUrl, setShareUrl] = useState("");
   const [showSharePopup, setShowSharePopup] = useState(false);
@@ -109,12 +109,19 @@ const Profile = () => {
                 </Link>
                 <FaShareAlt
                   onClick={() => {
-                    const profileKey = name.toLowerCase().replace(/\s +/g, "");
-                    const generatedURL = `${window.location.origin}/shared/${profileKey}`;
+                    const userNameKey = name.toLowerCase().replace(/\s+/g, "");
+
+                    // Store: username → uuid
+                    localStorage.setItem(`user_map_${userNameKey}`, userId);
+
+                    // Store: uuid → actual profile data
                     localStorage.setItem(
-                      `profile_${profileKey}`,
+                      `profile_${userId}`,
                       JSON.stringify({ name, bio, image: previewImage })
                     );
+
+                    // Clean URL
+                    const generatedURL = `${window.location.origin}/shared/${userNameKey}`;
                     setShareUrl(generatedURL);
                     setShowSharePopup(true);
                   }}
@@ -180,8 +187,8 @@ const Profile = () => {
         ))}
       </div>
       {isEditModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-black p-6 rounded-xl relative w-full max-w-lg">
+        <div className="fixed inset-0 bg-[#1E1E1E] bg-opacity-75 flex items-center justify-center z-50 border border-[#FFFFFF1C]">
+          <div className="bg-[#1E1E1E] p-6 rounded-xl relative w-full max-w-lg">
             <button
               onClick={() => setIsEditModalOpen(false)}
               className="absolute top-2 right-3 text-white text-xl font-bold"
@@ -189,6 +196,43 @@ const Profile = () => {
               ×
             </button>
             <EditProfile />
+          </div>
+        </div>
+      )}
+      {showSharePopup && (
+        <div className="fixed inset-0 bg-[#1E1E1E] bg-opacity-75 flex items-center justify-center z-50 border border-[#FFFFFF1C]">
+          <div className="bg-[#1E1E1E] text-white p-6 rounded-xl w-full max-w-md relative">
+            <button
+              onClick={() => setShowSharePopup(false)}
+              className="absolute top-2 right-3 text-white text-xl font-bold"
+            >
+              ×
+            </button>
+            <h2 className="text-lg font-productsans text-[#FFFFFF] mb-4 font-semibold">
+              Share Profile
+            </h2>
+
+            {/* Relative container for input + button */}
+            <div className="relative mb-4">
+              <input
+                type="text"
+                value={shareUrl}
+                readOnly
+                className="w-full p-2 pr-10  bg-[#D9D9D91A]
+                rounded text-[#FFFFFF99]"
+              />
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(shareUrl)
+                    .then(() => alert("URL copied to clipboard!"))
+                    .catch((err) => console.error("Copy failed", err));
+                }}
+                className="absolute top-1/2 right-2 -translate-y-1/2 text-[#FFFFFF99]"
+              >
+                <FaRegCopy />
+              </button>
+            </div>
           </div>
         </div>
       )}

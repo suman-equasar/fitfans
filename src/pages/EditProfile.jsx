@@ -37,7 +37,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 mt-10 bg-[#FFFFFF1C] text-white rounded-xl space-y-4">
+    <div className="max-w-xl mx-auto p-6 mt-10 bg-[#1E1E1E] text-white rounded-xl space-y-4">
       <h2 className="text-xl font-bold font-productsans">Edit Profile</h2>
 
       <div className="space-y-2">
@@ -47,7 +47,7 @@ const EditProfile = () => {
           value={tempName}
           onChange={(e) => setTempName(e.target.value)}
           maxLength={50}
-          className="w-full px-3 py-2 bg-gray-800  font-productsans text-[#707070]
+          className="w-full px-3 py-2 bg-[#D9D9D91A]  font-productsans text-[#FFFFFF99]
           rounded-md focus:outline-none"
         />
       </div>
@@ -57,10 +57,10 @@ const EditProfile = () => {
         <textarea
           value={tempBio}
           onChange={handleBioChange}
-          className="w-full px-3 py-2 bg-gray-800 rounded-md  font-productsans text-[#707070] resize-none focus:outline-none"
+          className="w-full px-3 py-2 bg-[#D9D9D91A] rounded-md  font-productsans text-[#FFFFFF99] resize-none focus:outline-none"
           rows={4}
         />
-        <div className="text-right text-xs text-[#707070]">
+        <div className="text-right text-xs text-[#FFFFFF99]">
           {tempBio.length}/200
         </div>
         {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
