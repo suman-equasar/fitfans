@@ -23,22 +23,28 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="h-screen w-64 bg-black text-white flex flex-col py-6 px-4 fixed left-0 top-0">
+    <aside className="h-screen w-64 bg-black gap-4 text-white flex flex-col py-4 px-4 fixed left-0 top-0">
       {/* Logo */}
-      <img src={logo} alt="logo" className="w-20 h-20 sm:w-28 sm:h-28 mb-6" />
+
+      <div className="flex mb-2 items-center ">
+        <img src={logo} alt="Logo" className="w-28 " />
+      </div>
 
       {/* Search Bar */}
-      <div className="mb-6 relative">
+      <div className=" relative">
         <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         <input
           type="text"
           placeholder="Search"
-          className="w-[90%] pl-10 pr-2 py-1 rounded-[2.5rem] bg-black border-[#FFFFFF1A ] border-[1px] placeholder-[#707070] text-sm"
+          className="w-[70%] pl-10 pr-2 py-1 rounded-[2.5rem] bg-black border-[#FFFFFF1A ] border-[1px] placeholder-[#707070] text-sm"
         />
       </div>
 
       {/* Navigation Menu */}
-      <nav className="space-y-3 text-lg font-productsans">
+      <nav
+        className="space-y-4  font-medium
+       font-productsans"
+      >
         <MenuItem icon={<FaHome />} label="For You" />
         <MenuItem icon={<FaCompass />} label="Explore" />
         <MenuItem icon={<FaEnvelope />} label="Messages" />
@@ -78,8 +84,8 @@ const Sidebar = () => {
 
 const MenuItem = ({ icon, label, to }) => (
   <Link to={to}>
-    <div className="flex items-center space-x-3 hover:text-[#08C7BF] cursor-pointer py-2">
-      <span className="text-lg w-5 flex justify-center">{icon}</span>
+    <div className="flex items-center space-x-3 hover:text-[#08C7BF] cursor-pointer text-[16px] py-2">
+      <span className=" w-5 flex justify-center">{icon}</span>
       <span>{label}</span>
     </div>
   </Link>

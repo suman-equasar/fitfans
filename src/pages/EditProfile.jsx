@@ -29,10 +29,10 @@ const EditProfile = () => {
     setBio(tempBio);
     localStorage.setItem("name", tempName);
     localStorage.setItem("bio", tempBio);
-    if (!bioRegex.test(tempBio)) {
-      setError("Bio cannot exceed 200 characters.");
-      return;
-    }
+    // if (!bioRegex.test(tempBio)) {
+    //   setError("Bio cannot exceed 200 characters.");
+    //   return;
+    // }
     setIsEditModalOpen(false);
   };
 

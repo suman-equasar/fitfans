@@ -24,7 +24,9 @@ export const UserProvider = ({ children }) => {
   const getOrCreateHandle = () => {
     let handle = localStorage.getItem("handle");
     if (!handle) {
-      const newHandle = "user" + uuidv4().slice(0, 6);
+      let userName = localStorage.getItem("name") || "alexander";
+      userName = userName.toLowerCase().replace(/\s+/g, "");
+      const newHandle = userName + uuidv4().slice(0, 6);
       localStorage.setItem("handle", newHandle);
       return newHandle;
     }
