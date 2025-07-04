@@ -4,13 +4,8 @@ import { useParams } from "react-router-dom";
 const SharedProfile = () => {
   const { id } = useParams();
 
-  // Step 1: Convert username → UUID
-  const userId = localStorage.getItem(`user_map_${id.toLowerCase()}`);
-
   // Step 2: Fetch profile using UUID
-  const profileData = userId
-    ? JSON.parse(localStorage.getItem(`profile_${userId}`))
-    : null;
+  const profileData = JSON.parse(localStorage.getItem(`profile_${id}`));
 
   // Step 3: Fallback if not found
   if (!profileData) {
@@ -27,7 +22,7 @@ const SharedProfile = () => {
         className="w-24 h-24 rounded-full object-cover border border-gray-600 mx-auto"
       />
       <h2 className="text-center text-2xl font-bold">{profileData.name}</h2>
-      <p className="text-center text-gray-400">@{id}</p> {/* only shows name */}
+
       <p className="text-sm text-center mt-4">{profileData.bio}</p>
     </div>
   );

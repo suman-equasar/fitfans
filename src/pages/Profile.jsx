@@ -107,11 +107,6 @@ const Profile = () => {
                 </Link>
                 <FaShareAlt
                   onClick={() => {
-                    const userNameKey = name.toLowerCase().replace(/\s+/g, "");
-
-                    // Store: username → uuid
-                    localStorage.setItem(`user_map_${userNameKey}`, userId);
-
                     // Store: uuid → actual profile data
                     localStorage.setItem(
                       `profile_${userId}`,
@@ -119,7 +114,7 @@ const Profile = () => {
                     );
 
                     // Clean URL
-                    const generatedURL = `${window.location.origin}/shared/${userNameKey}`;
+                    const generatedURL = `${window.location.origin}/shared/${userId}`;
                     setShareUrl(generatedURL);
                     setShowSharePopup(true);
                   }}

@@ -4,8 +4,11 @@ import React, { createContext, useState } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [name, setName] = useState(localStorage.getItem("name") || "alexander");
-  const [bio, setBio] = useState(localStorage.getItem("bio") || "");
+  const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+
+  const [name, setName] = useState(currentUser.name || "alexander");
+  const [bio, setBio] = useState(currentUser.bio || "");
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Unique user ID (never changes)

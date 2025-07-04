@@ -27,8 +27,8 @@ const EditProfile = () => {
   const handleSave = () => {
     setName(tempName);
     setBio(tempBio);
-    localStorage.setItem("name", tempName);
-    localStorage.setItem("bio", tempBio);
+    // localStorage.setItem("name", tempName);
+    // localStorage.setItem("bio", tempBio);
     // if (!bioRegex.test(tempBio)) {
     //   setError("Bio cannot exceed 200 characters.");
     //   return;
