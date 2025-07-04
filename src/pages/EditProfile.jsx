@@ -27,12 +27,27 @@ const EditProfile = () => {
   const handleSave = () => {
     setName(tempName);
     setBio(tempBio);
-    // localStorage.setItem("name", tempName);
-    // localStorage.setItem("bio", tempBio);
-    // if (!bioRegex.test(tempBio)) {
-    //   setError("Bio cannot exceed 200 characters.");
-    //   return;
-    // }
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) return;
+
+    // Update the current user object
+    const updatedUser = {
+      ...currentUser,
+      name: tempName,
+      bio: tempBio,
+    };
+
+    // Save to localStorage: currentUser
+    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+    // Update the users array
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const updatedUsers = users.map((user) =>
+      user.userId === updatedUser.userId ? updatedUser : user
+    );
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
     setIsEditModalOpen(false);
   };
 

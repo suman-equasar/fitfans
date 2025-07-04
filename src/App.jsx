@@ -19,7 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forget" element={<ForgotPassword />} />
 
-          <Route path="shared/:id" element={<SharedProfile />} />
+          <Route path="profile/:id" element={<SharedProfile />} />
 
           <Route path="/dashboard" element={<MainLayout />}>
             <Route path="profile" element={<Profile />} />

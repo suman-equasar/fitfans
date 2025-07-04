@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../assets/Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { v4 as uuidv4 } from "uuid";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -70,9 +71,22 @@ const SignUp = () => {
       console.log("Form submitted:", formData);
       // Reset or send to API here
       const users = JSON.parse(localStorage.getItem("users")) || [];
-      users.push(formData);
+
+      const newUserId = uuidv4();
+      const handle =
+        formData.username.toLowerCase().replace(/\s+/g, "") +
+        uuidv4().slice(0, 6);
+
+      const newUser = {
+        ...formData,
+        userId: newUserId,
+        handle,
+        bio: "",
+      };
+
+      users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
-      console.log("Data saved to localStorage:", users);
+      localStorage.setItem("currentUser", JSON.stringify(newUser));
       setFormData({
         name: "",
         username: "",

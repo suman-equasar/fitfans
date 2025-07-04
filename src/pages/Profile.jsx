@@ -114,7 +114,8 @@ const Profile = () => {
                     );
 
                     // Clean URL
-                    const generatedURL = `${window.location.origin}/shared/${userId}`;
+                    const generatedURL = `${window.location.origin}/shared/${userHandle}_${userId}`;
+
                     setShareUrl(generatedURL);
                     setShowSharePopup(true);
                   }}

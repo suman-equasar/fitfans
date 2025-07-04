@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 
 const SharedProfile = () => {
   const { id } = useParams();
+  const userIdFromUrl = id.split("_").pop(); // Get only the UUID
 
-  // Step 2: Fetch profile using UUID
-  const profileData = JSON.parse(localStorage.getItem(`profile_${id}`));
+  const profileData = JSON.parse(
+    localStorage.getItem(`profile_${userIdFromUrl}`)
+  );
 
   // Step 3: Fallback if not found
   if (!profileData) {

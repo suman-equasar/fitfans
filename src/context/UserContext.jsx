@@ -10,32 +10,10 @@ export const UserProvider = ({ children }) => {
   const [bio, setBio] = useState(currentUser.bio || "");
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [userId] = useState(currentUser.userId || "");
+  const [userHandle] = useState(currentUser.handle || "");
 
   // Unique user ID (never changes)
-  const getOrCreateUserId = () => {
-    let storedId = localStorage.getItem("userId");
-    if (!storedId) {
-      const newId = uuidv4();
-      localStorage.setItem("userId", newId);
-      return newId;
-    }
-    return storedId;
-  };
-  const [userId] = useState(getOrCreateUserId());
-
-  // Unique user handle (e.g. @user3fae1b)
-  const getOrCreateHandle = () => {
-    let handle = localStorage.getItem("handle");
-    if (!handle) {
-      let userName = localStorage.getItem("name") || "alexander";
-      userName = userName.toLowerCase().replace(/\s+/g, "");
-      const newHandle = userName + uuidv4().slice(0, 6);
-      localStorage.setItem("handle", newHandle);
-      return newHandle;
-    }
-    return handle;
-  };
-  const [userHandle] = useState(getOrCreateHandle());
 
   return (
     <UserContext.Provider
