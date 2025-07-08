@@ -21,7 +21,7 @@ const EditProfile = () => {
       setTempBio(newBio);
       setError(""); // Clear error if valid
     } else {
-      setError("Bio cannot exceed 200 characters."); // Set error if invalid
+      setError("xyz"); // Set error if invalid
     }
   };
   const handleSave = () => {
